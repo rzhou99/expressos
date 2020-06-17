@@ -4,9 +4,7 @@
   let data;
   onMount(async () => {
     console.log("mounting");
-    data = await fetch(
-      "localhost:4000/information?url=https://www.glassdoor.com/Reviews/Expression-Networks-Reviews-E502523.htm"
-    ).then(x => x.json());
+    data = await fetch("http://localhost:4000/information").then(x => x.json());
   });
 </script>
 
@@ -35,7 +33,7 @@
 <main>
   <h1>Hello there!</h1>
 
-  <p>{JSON.stringify(data)}</p>
+  <p>{data ? JSON.stringify(data) : 'Loading...'}</p>
   <p>
     Visit the
     <a href="https://svelte.dev/tutorial">Svelte tutorial</a>

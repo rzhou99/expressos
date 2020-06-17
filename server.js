@@ -1,13 +1,17 @@
 const puppeteer = require("puppeteer");
 const express = require("express");
+const cors = require("cors");
 // NOTE: you can not use ES6 here, node doesn't work with it unless you have a ton of babel boilerplate.
 const app = express();
+app.use(cors());
 
-app.get("/information", async (req, res) => {
+app.get("/information", async (_, res) => {
   console.log("runnning information endpoint");
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto(req.query.url); // URL is given by the "user" (your client-side application)
+  await page.goto(
+    "https://www.glassdoor.com/Reviews/Expression-Networks-Reviews-E502523.htm"
+  ); // URL is given by the "user" (your client-side application)
 
   const items = await page.$$(".mainText");
   const sum = await page.$$(".summary");
